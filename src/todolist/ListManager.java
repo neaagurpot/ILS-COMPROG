@@ -1,7 +1,9 @@
 package todolist;
+import java.util.Scanner;
 import java.util.LinkedList;
 public class ListManager {
     private LinkedList<List> listManager = new LinkedList<>();
+    private Scanner sc = new Scanner(System.in);
 
     public void addList(String toDoList) {
         List list = new List(toDoList);
@@ -46,5 +48,24 @@ public class ListManager {
         } else {
             System.out.println("Task number not found");
         }
+    }
+
+    public void markTask() {
+        viewList();
+
+        if (!listManager.isEmpty()) {
+            System.out.println("Enter a task number to MARK DONE");
+            int id = sc.nextInt();
+            int index = id - 1;
+            if (index >= 0 && index < listManager.size()) {
+                System.out.println();
+                List completedTask = listManager.get(index);
+                completedTask.setToDoList(completedTask.getList() + " - ✅");
+                System.out.println("Marked as Done: " + completedTask.getList());
+            } else {
+                System.out.println(" - PENDING");
+            }
+        }
+
     }
 }

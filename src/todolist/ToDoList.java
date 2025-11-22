@@ -83,7 +83,7 @@ public class ToDoList {
         int choice;
 
         do {
-            System.out.println("\n=== Menu's === ");
+            System.out.println("\n === Menu's === ");
             System.out.println("1. View Tasks");
             System.out.println("2. Add Task");
             System.out.println("3. Edit task");
