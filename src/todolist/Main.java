@@ -8,9 +8,7 @@ public class Main {
         ListManager manager = new ListManager();
         int choice;
         int id = 0;
-
         do {
-
             try {
                 System.out.println("""
 	                		      ---------------------------------------
@@ -18,7 +16,7 @@ public class Main {
 	                		      ---------------------------------------
 	                        [1]. Add TO DO LIST.                 
 	                        [2]. VIEW LIST.                      
-	                        [3]. SEARCH Via ID/Number of the list.
+	                        [3]. MARK TASK
 	                        [4]. delete list.                    
 	                        [5]. EXIT                            
 	                        ---------------------------------------
@@ -28,8 +26,9 @@ public class Main {
                 choice = sc.nextInt();
                 sc.nextLine();
             } catch (InputMismatchException e) {
+                Thread.currentThread().interrupt();
                 System.out.println("Choice must be a Number");
-                return;
+                break;
             }
 
             switch (choice) {
@@ -44,19 +43,12 @@ public class Main {
                     manager.viewList();
                 }
                 case 3 -> {
-                    try {
-                        System.out.print("Enter List number to Search: ");
-                        id = sc.nextInt() - 1;
-                    } catch (InputMismatchException e) {
-                        System.out.println("Input must be a number");
-                        return;
-                    }
-                    manager.accessToDoListById(id);
+                    manager.markTask();
                 }
                 case 4 -> {
                     try {
                         System.out.print("Enter id to Delete: ");
-                        id = sc.nextInt() - 1;
+                        id = sc.nextInt();
                     } catch (InputMismatchException e) {
                         System.out.println("Input must be a number");
                         return;
@@ -65,12 +57,14 @@ public class Main {
                 }
                 case 5 -> {
                     System.out.println("Exiting");
-                    for (int i = 0; i < 4; i++) {
+
                         try {
-                            Thread.sleep(400);
-                            System.out.println(".");
-                            System.exit(0);
-                            sc.close();
+                            for (int i = 0; i < 5; i++) {
+                                Thread.sleep(400);
+                                System.out.println(".");
+                                System.exit(0);
+                                sc.close();
+                            }
                         } catch (InterruptedException e) {
                             Thread.currentThread().interrupt();
                             System.exit(0);
@@ -78,9 +72,9 @@ public class Main {
                         }
                     }
                 }
-            }
-        } while (choice != 5);
+            } while (choice != 5);
+        }
 
     }
 
-}
+
